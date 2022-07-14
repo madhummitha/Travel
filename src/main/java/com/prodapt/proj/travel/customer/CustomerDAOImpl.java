@@ -1,24 +1,18 @@
 package com.prodapt.proj.travel.customer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomerDAOImpl implements CustomerDAO {
-	private static Customer[] customers;
-	private static int lastIndex;
+	private static List<Customer> customers;
 	
-	public CustomerDAOImpl(int size) {
-		customers = new Customer[size];
-		lastIndex = -1;
+	public CustomerDAOImpl() {
+		customers = new ArrayList<>();
 	}
 	
 	@Override
 	public boolean addCustomer(Customer cust) {
-		boolean result = false;
-		if (lastIndex + 1 > customers.length) {
-			result = false;
-		} else {
-			lastIndex++;
-			customers[lastIndex] = cust;
-		}
-		return result;
+		return customers.add(cust);
 	}
 	
 	@Override
@@ -27,6 +21,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		for(Customer x: customers) {
 			if(x.getId() == id) {
 				c = x;
+				break;
 			}
 		}
 		return c;

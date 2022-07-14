@@ -1,32 +1,27 @@
 package com.prodapt.proj.travel.driver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CabDriverDAOImpl implements CabDriverDAO{
-	private static CabDriver[] cabDrivers;
-	private static int lastIndex;
+	private static List<CabDriver> drivers;
 	
-	public CabDriverDAOImpl(int size) {
-		cabDrivers = new CabDriver[size];
-		lastIndex = -1;
+	public CabDriverDAOImpl() {
+		drivers = new ArrayList<>();
 	}
 
 	@Override
-	public boolean addCabDriver(CabDriver driver) {
-		boolean result = false;
-		if (lastIndex + 1 > cabDrivers.length) {
-			result = false; 
-		} else {
-			lastIndex++;
-			cabDrivers[lastIndex] = driver;
-		}
-		return result;
+	public boolean addCabDriver(CabDriver cd) {
+		return drivers.add(cd);
 	}
 
 	@Override
 	public CabDriver findCabDriver(int id) {
 		CabDriver c = null;
-		for (CabDriver d: cabDrivers) {
+		for (CabDriver d: drivers) {
 			if (d.getId() == id) {
 				c = d;
+				break;
 			}
 		}
 		return c;
@@ -34,7 +29,7 @@ public class CabDriverDAOImpl implements CabDriverDAO{
 
 	@Override
 	public void displayAllCabDrivers() {
-		for (CabDriver c: cabDrivers) {
+		for (CabDriver c: drivers) {
 			System.out.println(c);
 		}
 	}
