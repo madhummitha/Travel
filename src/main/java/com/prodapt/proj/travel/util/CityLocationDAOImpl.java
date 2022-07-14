@@ -1,26 +1,18 @@
 package com.prodapt.proj.travel.util;
 
-import com.prodapt.proj.travel.vehicle.Vehicle;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CityLocationDAOImpl implements CityLocationDAO {
-	private static CityLocation[] cityLocations;
-	private static int lastIndex;
+	private static List<CityLocation> cityLocations;
 
-	public CityLocationDAOImpl(int size) {
-		cityLocations = new CityLocation[size];
-		lastIndex = -1;
+	public CityLocationDAOImpl() {
+		cityLocations = new ArrayList<>();
 	}
 
 	@Override
 	public boolean addCityLocation(CityLocation cityLocation) {
-		boolean result = false;
-		if (lastIndex + 1 > cityLocations.length) {
-			result = false;
-		} else {
-			lastIndex++;
-			cityLocations[lastIndex] = cityLocation;
-		}
-		return result;
+		return cityLocations.add(cityLocation);
 	}
 
 	@Override
@@ -29,8 +21,10 @@ public class CityLocationDAOImpl implements CityLocationDAO {
 		for (CityLocation x : cityLocations) {
 			if (x.getCity1().equals(city1) && x.getCity2().equals(city2)) {
 				v = x;
+				break;
 			} else if (x.getCity1().equals(city1) && x.getCity2().equals(city2)) {
 				v = x;
+				break;
 			}
 		}
 		return v;

@@ -1,7 +1,5 @@
 package com.prodapt.proj.travel.driver;
 
-import com.prodapt.proj.travel.customer.Customer;
-
 public class CabDriver {
 	private int id;
 	private String driverName;
