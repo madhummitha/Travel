@@ -1,18 +1,27 @@
 package com.prodapt.proj.travel.util;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CityLocationDAOImpl implements CityLocationDAO {
 	private static List<CityLocation> cityLocations;
 
 	public CityLocationDAOImpl() {
 		cityLocations = new ArrayList<>();
-	}
-
-	@Override
-	public boolean addCityLocation(CityLocation cityLocation) {
-		return cityLocations.add(cityLocation);
+		try (InputStream is = new FileInputStream("src/main/resources/locations.txt");
+				Scanner sc = new Scanner(is);) {
+			while (sc.hasNextLine()) {
+				String line = sc.nextLine();
+				CityLocation cl = CityLocation.parseCityLocation(line);
+				cityLocations.add(cl);
+			}
+			sc.close();
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
 	}
 
 	@Override

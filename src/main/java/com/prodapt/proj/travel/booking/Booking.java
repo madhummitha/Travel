@@ -103,28 +103,6 @@ public class Booking {
 		}
 	}
 
-	public static Booking parseBooking(String line) {
-		Booking b = null;
-		String[] v = line.split(",");
-		int bookingNo = Integer.parseInt(v[0]);
-		String pickupFrom = v[1];
-		String dropAt = v[2];
-
-		CustomerDAO cdao = new CustomerDAOImpl();
-		VehicleDAO vdao = new VehicleDAOImpl();
-		CabDriverDAO ddao = new CabDriverDAOImpl();
-
-		Customer customer = cdao.findCustomer(Integer.parseInt(v[3]));
-		Vehicle vehicle = vdao.findVehicle(v[4]);
-		CabDriver driver = ddao.findCabDriver(Integer.parseInt(v[5]));
-		System.out.println("Customer is "+customer);
-		System.out.println("Vehicle: "+vehicle);
-		System.out.println("Driver: "+driver);
-
-		b = new Booking(bookingNo, pickupFrom, dropAt, customer, vehicle, driver);
-		return b;
-	}
-
 	public String toString() {
 		return bookingNo + " " + pickupFrom + " " + dropAt + " " + customer + " " + vehicle + " " + driver + " " + fare;
 	}
