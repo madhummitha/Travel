@@ -1,18 +1,27 @@
 package com.prodapt.proj.travel.driver;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CabDriverDAOImpl implements CabDriverDAO{
 	private static List<CabDriver> drivers;
 	
 	public CabDriverDAOImpl() {
 		drivers = new ArrayList<>();
-	}
-
-	@Override
-	public boolean addCabDriver(CabDriver cd) {
-		return drivers.add(cd);
+		try (InputStream is = new FileInputStream("src/main/resources/cabDriver.txt");
+				Scanner sc = new Scanner(is);) {
+			while (sc.hasNextLine()) {
+				String line = sc.nextLine();
+				CabDriver cd = CabDriver.parseCabDriver(line);
+				drivers.add(cd);
+			}
+			sc.close();
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
 	}
 
 	@Override

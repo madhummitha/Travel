@@ -1,0 +1,5 @@
+Chennai,Bangalore,347
+Bangalore,Chennai,347
+Chennai,Kanyakumari,200
+Kanyakumari,Chennai,200
+Goa,Mumbai,600

@@ -1,18 +1,27 @@
 package com.prodapt.proj.travel.customer;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CustomerDAOImpl implements CustomerDAO {
 	private static List<Customer> customers;
 	
 	public CustomerDAOImpl() {
 		customers = new ArrayList<>();
-	}
-	
-	@Override
-	public boolean addCustomer(Customer cust) {
-		return customers.add(cust);
+		try (InputStream is = new FileInputStream("src/main/resources/customers.txt");
+				Scanner sc = new Scanner(is);){			
+			while (sc.hasNextLine()) {
+				String line = sc.nextLine();
+				Customer c = Customer.parseCustomer(line);
+				customers.add(c);
+			}
+			sc.close();
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
 	}
 	
 	@Override
